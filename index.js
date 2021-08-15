@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 });
 
 app.all("*", (req, res) => {
-  res.status(400).json({ message: "Page not found 1" });
+  res.status(400).json({ message: "Page not found " });
 });
 
 app.listen(process.env.PORT, () => {
