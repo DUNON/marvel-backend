@@ -59,4 +59,27 @@ router.get("/comics/:id", async (req, res) => {
     console.log(error.message);
   }
 });
+
+router.get("/search/:category/:search", async (req, res) => {
+    
+  try {
+    const category = req.params.category;
+    const search = req.params.search;
+
+    let response;
+    if (category === "characters") {
+      response = await axios.get(
+        `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${process.env.APIKEY}&name=${search}`
+      );
+    } else {
+      response = await axios.get(
+        `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${process.env.APIKEY}&title=${search}`
+      );
+    }
+    res.status(200).json(response.data);
+  } catch (error) {
+    res.json(error.message);
+  }
+});
+
 module.exports = router;
